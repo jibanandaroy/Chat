@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import '../style.css'
 import { auth, db } from '../../firebase'
 import { setDoc, doc } from "firebase/firestore";
-import { useNavigate, Link} from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const Register = () => {
   const [error, setError] = useState(false)
@@ -50,7 +50,7 @@ const Register = () => {
           <input type="text" placeholder='display name' />
           <input type="email" placeholder='email' />
           <input type="password" placeholder='password' />
-          {/* <input type="file" /> */}
+
           <button>Sign up</button>
           {error && <span>Something went worng</span>}
         </form>

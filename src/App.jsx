@@ -4,6 +4,7 @@ import { AuthContext } from "./context/AuthContext";
 import { Home } from "./App/home/Home";
 import Login from "./App/auth/Login";
 import Register from "./App/auth/Register";
+import { UserList } from "./App/user/UserList";
 function App() {
   const { currentUser } = useContext(AuthContext);
 
@@ -21,6 +22,7 @@ function App() {
           <Route index element={<ProtectedRoute><Home/></ProtectedRoute>}/>
           <Route path="/login" element={<Login/>}/>
           <Route path="/register" element={<Register/>}/>
+          <Route path="/user" element={<UserList/>}/>
         </Route>
       </Routes>
     </BrowserRouter>
