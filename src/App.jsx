@@ -22,7 +22,7 @@ function App() {
           <Route index element={<ProtectedRoute><Home/></ProtectedRoute>}/>
           <Route path="/login" element={<Login/>}/>
           <Route path="/register" element={<Register/>}/>
-          <Route path="/user" element={<UserList/>}/>
+          <Route path="/user" element={<ProtectedRoute><UserList/></ProtectedRoute>}/>
         </Route>
       </Routes>
     </BrowserRouter>
