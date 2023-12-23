@@ -13,15 +13,15 @@ import {
     onSnapshot,
     serverTimestamp
 } from "firebase/firestore";
-import { useNavigate,  useSearchParams } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 
 
 export const Home = () => {
     const navigate = useNavigate()
-    const [param]=useSearchParams()
-    const id= param.get('id')
-    const name= param.get('name')
-    
+    const [param] = useSearchParams()
+    const id = param.get('id')
+    const name = param.get('name')
+
     const [message, setMessage] = useState([]);
     const { currentUser } = useContext(AuthContext)
     const messageCollectionRef = collection(db, "messages");
@@ -38,6 +38,12 @@ export const Home = () => {
     }, [])
 
     const HandleSend = async () => {
+        if(!id)
+        {
+            alert('receiver not selected');
+            setData((prev) => ({ ...prev, text: '' }))
+            return;
+        }
         addDoc(messageCollectionRef, data)
         setData((prev) => ({ ...prev, text: '' }))
     }
@@ -61,14 +67,14 @@ export const Home = () => {
         ref.current?.scrollIntoView({ behavior: "smooth" });
     }, [message]);
 
-    const handleuser = ()=>{
+    const handleuser = () => {
         navigate('/user')
     }
     return (
-        <div  className="home">
+        <div className="home">
 
             <>
-                
+
                 <button className='btn' onClick={() => signOut(auth)}>logout</button>
                 <button className='btn' onClick={handleuser}>userList</button>
                 <span>{currentUser.displayName}</span>
@@ -77,8 +83,8 @@ export const Home = () => {
                     <div className="top_menu">
                         <span>{name}</span>
                         <div className="title">Live Chat</div>
-                        
-                       
+
+
                     </div>
 
                     <div className="p_message" >
@@ -94,23 +100,23 @@ export const Home = () => {
                                                 <p>{doc.text}</p>
                                             </div>
                                         </div> :
-                                        (doc.uid === currentUser.uid)?
-                                        < div className="message owner" >
-                                            <div className="messageInfo">
-                                                <img src="https://images.pexels.com/photos/19486301/pexels-photo-19486301/free-photo-of-model-in-a-blue-coat-on-the-terrace.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load" alt="" />
-                                            </div>
-                                            <div ref={ref} className="messageContent">
-                                                <p>{doc.text}</p>
-                                            </div>
-                                        </div>:''
+                                        (doc.uid === currentUser.uid) && (id) ?
+                                            < div className="message owner" >
+                                                <div className="messageInfo">
+                                                    <img src="https://images.pexels.com/photos/19486301/pexels-photo-19486301/free-photo-of-model-in-a-blue-coat-on-the-terrace.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load" alt="" />
+                                                </div>
+                                                <div ref={ref} className="messageContent">
+                                                    <p>{doc.text}</p>
+                                                </div>
+                                            </div> : ''
                                 }
                             </div>
 
                         ))}
                     </div>
-
-                    <div className="bottom_wrapper clearfix">
-                        <div className="message_input_wrapper">
+                    
+                    <div className="bottom_wrapper clearfix"> 
+                        <div className="message_input_wrapper">   
                             <input
                                 className="message_input"
                                 type='text'

@@ -44,15 +44,15 @@ export const UserList = () => {
                     <thead>
                         <tr>
                             <th>name</th>
-                            <th>id</th>
+                            {/* <th>id</th> */}
                         </tr>
                     </thead>
                     <tbody>
                         {user&& user.map((doc, ind) => (
                             <tr key={ind}>
                                 <td>{doc.displayName}</td>
-                                <td>{doc.uid}</td>
-                                <td onClick={()=>HandleUser(doc.uid,doc.displayName)}><button>send</button></td>
+                                {/* <td>{doc.uid}</td> */}
+                                <td onClick={()=>HandleUser(doc.uid,doc.displayName)}><button>chat</button></td>
                             </tr>
                         ))}
                     </tbody>
